@@ -39,5 +39,9 @@ GooseCode.lk
 *.dmb
 GooseCode.dyn.rsc
 banlist.dbd
-admins.txt
-config/admins.txt
+*.dme
+*.int
+GooseCode.int
+*.int
+*.int
+*.dme

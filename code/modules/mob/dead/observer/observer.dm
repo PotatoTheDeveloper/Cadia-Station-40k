@@ -398,7 +398,7 @@ Update: What have we created? something awful -wel ard
 	set desc = "Allows a player who has been authorized to use a whitelisted role to respawn as that role."
 	if(!ticker || !ticker.mode)
 		usr << "\blue The game hasn't started yet!"
-		return
+		return 
 	if(!can_rtd)
 		usr << "\red <b>The fealty of your soul is commanded by [master]. You are not free to go.</b>"
 		return
@@ -524,7 +524,7 @@ Update: What have we created? something awful -wel ard
 
 		if("KRIEGOFFICERS")
 			message_admins("[usr.key] executed RTD faction: Krieger Officer.", 0)
-			usr << "\blue You are an officer of the Death Korps of Krieg. The Lord General of ArchAngel IV has activated a distress beacon."
+			usr << "\blue You are an officer of the Death Korps of Krieg. The Rogue Trader of ArchAngel IV has activated a distress beacon."
 			usr.loc = get_turf(locate("landmark*kriegofficerstart"))
 			var/mob/living/carbon/human/kriegofficer/new_character = new(usr.loc)
 			new_character.key = usr.key
