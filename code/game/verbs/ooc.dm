@@ -61,7 +61,7 @@
 	if (ooc_allowed)
 		world << "<B>Connections in the warp have opened back up!</B>"
 	else
-		world << "<B>The warp has closed itself off from moral ears!</B>"
+		world << "<B>The warp has closed itself off from mortal ears!</B>"
 
 /proc/auto_toggle_ooc(var/on)
 	if(!config.ooc_during_round && ooc_allowed != on)
