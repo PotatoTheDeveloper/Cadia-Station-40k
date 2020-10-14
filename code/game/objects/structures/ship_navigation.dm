@@ -19,7 +19,7 @@
 	else
 		icon_state = "[base_icon]0"
 
-/obj/machinery/shipnav/proc/accept_pilot(var/mob/living/M)
+/obj/machinery/shipnav/proc/accept_pilot(var/mob/living/carbon/human/whitelisted/pm/M)
 	M.loc = src
 	pilot = M
 	if(pilot.client)
