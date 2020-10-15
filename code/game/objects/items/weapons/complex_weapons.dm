@@ -368,6 +368,19 @@ Eldar PSword
 	origin_tech = "combat=8"
 	attack_verb = list("stabbed", "slashed", "torn", "cut")
 
+/obj/item/weapon/eldar/spear
+	name = "Singing Spear"
+	desc = "A psychically-charged melee weapon used by Eldar Warlocks. There are various sigils, runes, and markings that run along the length of the shaft"
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "staff"
+	item_state = "staff"
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	force = 40
+	throwforce = 45
+	throw_speed = 4
+	throw_range = 7
+	attack_verb = list ("sliced", "stabbed", "cut", "impaled", "pierced")
+
 //um powersword
 
 /obj/item/weapon/powersword/umpsword
@@ -460,8 +473,14 @@ Eldar PSword
 	attack_speedmod = 2
 
 /obj/item/weapon/powersword/mace/om
-	name = "Power Maul"
-	desc = "A brutal looking maul covered in holy rites and blessings. An Inquisitorial Seal is present on the hilt."
+	name = "Power Hammer"
+	desc = "A brutal looking power hammer covered in holy rites and blessings. An Inquisitorial Seal is present on the hilt."
+	icon_state = "sledgehammer"
+	item_state = "sledgehammer"
+	icon_on = "sledgehammerpower"
+	icon_off = "sledgehammer"
+	item_on = "sledgehammerpower"
+	item_off = "sledgehammer"
 
 /obj/item/weapon/powersword/burning
 	name = "Burning Blade"
