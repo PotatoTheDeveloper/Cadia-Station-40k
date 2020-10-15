@@ -908,18 +908,6 @@ Two handed "mercy" chainsword class. One of the most devestating melee weapons, 
 	if(ishuman(user) && ishuman(M))
 		var/mob/living/carbon/human/H = user
 		var/mob/living/carbon/human/T = M
-		if(CLUMSY in H.mutations)
-			H.visible_message("<span class='danger'>[H] accidentally slices themselves with the [src]!</span>")
-			new /obj/effect/gibspawner/blood(H.loc)
-			H.take_organ_damage(40, 0)
-			H.Weaken(1)
-			return
-		if(H.inertial_speed == null)
-			H.visible_message("<span class='danger'>[H] accidentally slices themselves with the [src]!</span>")
-			new /obj/effect/gibspawner/blood(H.loc)
-			H.take_organ_damage(40, 0)
-			H.Weaken(1)
-			return
 		if (H.a_intent == "disarm")
 			user.changeNext_move(CLICK_CD_MELEE)
 			var/obj/item/D = M.get_active_hand()
