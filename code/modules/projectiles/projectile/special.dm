@@ -343,3 +343,33 @@ obj/item/projectile/kinetic/New()
 		if(ishuman(target))
 			var/mob/living/carbon/M = target
 			M.paralysis = 7
+
+/obj/item/projectile/beam/destructor
+	name = "destructor"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "plasma"
+	trace_residue = null
+	damage = 30
+	damage_type = BURN
+	woundtype = /datum/wound/melt
+	on_hit(var/atom/target, var/blocked = 0)
+		if(isliving(target))
+			var/mob/living/carbon/M = target
+			M.adjustBrainLoss(15)
+			M.adjustCloneLoss(20)
+			M.hallucination += 20
+
+/obj/item/projectile/beam/destructor/lesser
+	name = "destructor"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "plasmablue"
+	trace_residue = null
+	damage = 20
+	damage_type = BURN
+	woundtype = /datum/wound/burn
+	on_hit(var/atom/target, var/blocked = 0)
+		if(isliving(target))
+			var/mob/living/carbon/M = target
+			M.adjustBrainLoss(10)
+			M.adjustCloneLoss(15)
+			M.hallucination += 10
