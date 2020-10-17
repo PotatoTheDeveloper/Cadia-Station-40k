@@ -935,7 +935,13 @@ Droppod
 	requires_power = 1
 	lighting_use_dynamic = 1
 
+/area/eldar
+	name = "Yraroth"
+	icon_state = "yellow"
+	requires_power = 0
 
+/area/eldar/spy
+	name = "Ears of Yraroth"
 
 
 //PRISON
