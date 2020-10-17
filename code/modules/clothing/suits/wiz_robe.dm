@@ -67,6 +67,18 @@
 	allowed = list(/obj/item/weapon/teleportation_scroll)
 	flags_inv = HIDEJUMPSUIT
 
+/obj/item/clothing/suit/wizrobe/warlock/seer
+	name = "Seer Robe"
+	desc = "An incredible example of Eldar Technology, these are used by novice followers of the path of the seer."
+	icon_state = "warlock"
+	item_state = "warlock"
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS
+	armor = list(melee = 60, bullet = 50, laser = 50,energy = 70, bomb = 35, bio = 100, rad = 100)
+	allowed = list(/obj/item/weapon/teleportation_scroll)
+	flags_inv = HIDEJUMPSUIT
+
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificant, red, gem-lined robe that seems to radiate power."

@@ -48,6 +48,7 @@ Eldar
 	gender = "female"
 	var/instealth = 0
 	var/s_cooldown = 0
+	var/r_cooldown = 0
 	maxHealth = 150
 	health = 150
 	status_flags = 0
@@ -58,13 +59,13 @@ Eldar
 	. += ..()
 
 /mob/living/carbon/human/whitelisted/eldar/New()
-	verbs.Add(/mob/living/carbon/human/whitelisted/eldar/verb/lungeat, /mob/living/carbon/human/whitelisted/eldar/verb/stealth)
+	verbs.Add(/mob/living/carbon/human/whitelisted/eldar/verb/lungeat, /mob/living/carbon/human/whitelisted/eldar/verb/stealth, /mob/living/carbon/human/whitelisted/eldar/verb/reflexes)
 	..()
 	var/obj/item/device/radio/headset/R = new /obj/item/device/radio/headset/headset_cent
 	R.set_frequency(1487)
 	equip_to_slot_or_del(R, slot_ears)
 	spawn(10)
-		var/weaponchoice = input("Loadout.","Select a Loadout") as null|anything in list("Corsair", "Guardian")
+		var/weaponchoice = input("Loadout.","Select a Loadout") as null|anything in list("Corsair", "Guardian", "Seer")
 		switch(weaponchoice)
 			if("Corsair")
 				equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/corsair, slot_back)
@@ -100,6 +101,29 @@ Eldar
 				equip_to_slot_or_del(new /obj/item/weapon/powersword/eldar, slot_belt)
 				equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate, slot_wear_id)
 				equip_to_slot_or_del(new /obj/item/device/chameleon, slot_r_store)
+				regenerate_icons()
+				rename_self("[name]")
+			if("Seer")
+				equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/warlock, slot_back)
+				equip_to_slot_or_del(new /obj/item/device/radio/headset, slot_ears)
+				equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple, slot_w_uniform)
+				equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe/warlock/seer, slot_wear_suit)
+				equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/wizard/seer, slot_head)
+				equip_to_slot_or_del(new /obj/item/clothing/glasses/night, slot_glasses)
+				equip_to_slot_or_del(new /obj/item/clothing/shoes/space_ninja, slot_shoes)
+				equip_to_slot_or_del(new /obj/item/device/webwaysummons, slot_in_backpack)
+				equip_to_slot_or_del(new /obj/item/device/soulstone, slot_in_backpack)
+				equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/scatapult, slot_in_backpack)
+				equip_to_slot_or_del(new /obj/item/weapon/gun/energy/eldarpistol, slot_in_backpack)
+				equip_to_slot_or_del(new /obj/item/clothing/gloves/warlock, slot_gloves)
+				equip_to_slot_or_del(new /obj/item/weapon/powersword/eldar, slot_belt)
+				equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate, slot_wear_id)
+				equip_to_slot_or_del(new /obj/item/device/chameleon, slot_r_store)
+				maxStress += 160
+				verbs += /mob/living/carbon/human/proc/psymode
+				verbs += /mob/living/carbon/human/proc/telepath
+				verbs += /mob/living/carbon/human/proc/quickening
+				sleep(5)
 				regenerate_icons()
 				rename_self("[name]")
 
@@ -185,6 +209,32 @@ Eldar
 			O.show_message("[U.name] appears from thin air!",1)
 		return 1
 	return 0
+
+/mob/living/carbon/human/whitelisted/eldar/verb/reflexes()
+	set category = "Eldar"
+	set name = "Reflexes"
+	set desc = "Allows you to dodge attacks for a short period of time."
+	toggle_reflexes()
+
+/mob/living/carbon/human/whitelisted/eldar/proc/toggle_reflexes()
+	var/mob/living/carbon/human/whitelisted/eldar/U = usr
+	if(dodging)
+		U << "\red You are already dodging!"
+		return
+	else
+		if(r_cooldown)
+			src << "\red Ability is still charging..."
+			return
+		r_cooldown = 1
+		spawn(260) r_cooldown = 0
+		spawn(0)
+			anim(U.loc,U,'icons/obj/projectiles.dmi',,"lbolr2",,U.dir)
+		dodging = 1
+		U << "\green You feel agile."
+		sleep(160)
+		U << "\blue Your reflexes return to normal."
+		dodging = 0
+
 
 
 //below is dark eldar stuff thats WIP

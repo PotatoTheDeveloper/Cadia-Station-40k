@@ -152,7 +152,6 @@
 		src << "You must be conscious and alive to use psychic abilities."
 		return
 	if(Stress + 30 <= maxStress)
-		Stress += 30
 		if(!T)
 			var/list/victims = list()
 			for(var/mob/living/carbon/C in oview(7))
@@ -164,6 +163,7 @@
 				return
 			src << "We psychically imprison [T]"
 			visible_message("\green <B>[src]'s eyes glow green!</B>")
+			Stress += 30
 			for(var/turf/W in orange(10,T)) //Their entire view so they can't see outside the walls around them.
 				if(get_dist(T,W) > 2)
 					var/obj/effect/turf_projection/prison = project_turf(T,W) //Makes a ring of hallucinated walls around you.
@@ -245,3 +245,133 @@
 		log_say("Telepathy: [key_name(src)]->[M.key] : [msg]")
 		M << "<span class='noticealien'><b><i>You hear a strange voice in your head... [msg]</i></b></span>"
 		src << {"<span class='noticealien'>You said: "[msg]" to [M]</span>"}
+
+/*
+ELDAR POWERS
+*/
+
+/mob/living/carbon/human/proc/destructor(var/atom/T)
+	set name = "Destructor"
+	set desc = "Smite your foes with the destructive powers of the warp."
+	set category = "Psy"
+	if (stat != CONSCIOUS)
+		src << "You must be conscious and alive to use psychic abilities."
+		return
+	if(Stress + 45 <= maxStress)
+		Stress += 45
+		if(!T)
+			var/list/victims = list()
+			for(var/mob/living/carbon/C in oview(7))
+				victims += C
+			T = input(src, "Who should we shoot?") as null|anything in victims
+		if(T)
+			src.visible_message("<span class='danger'>[src] projects the destructive powers of the warp!", "<span class='alertalien'>You send destruction to your foes.</span>")
+			var/turf/curloc = src.loc
+			var/atom/targloc
+			if(!istype(T, /turf/))
+				targloc = get_turf(T)
+			else
+				targloc = T
+			if (!targloc || !istype(targloc, /turf) || !curloc)
+				return
+			if (targloc == curloc)
+				return
+			var/obj/item/projectile/beam/destructor/A = new /obj/item/projectile/beam/destructor(src.loc)
+			A.current = curloc
+			A.yo = targloc.y - curloc.y
+			A.xo = targloc.x - curloc.x
+			A.process()
+		else
+			src << "\blue You cannot shoot at nothing!"
+	else
+		src << "\red Your soul cant handle that!"
+
+/mob/living/carbon/human/proc/lesserdestructor(var/atom/T)
+	set name = "Lesser Destructor"
+	set desc = "Smite your foes with the destructive powers of the warp."
+	set category = "Psy"
+	if (stat != CONSCIOUS)
+		src << "You must be conscious and alive to use psychic abilities."
+		return
+	if(Stress + 30 <= maxStress)
+		Stress += 30
+		if(!T)
+			var/list/victims = list()
+			for(var/mob/living/carbon/C in oview(7))
+				victims += C
+			T = input(src, "Who should we shoot?") as null|anything in victims
+		if(T)
+			src.visible_message("<span class='danger'>[src] projects the destructive powers of the warp!", "<span class='alertalien'>You send destruction to your foes.</span>")
+			var/turf/curloc = src.loc
+			var/atom/targloc
+			if(!istype(T, /turf/))
+				targloc = get_turf(T)
+			else
+				targloc = T
+			if (!targloc || !istype(targloc, /turf) || !curloc)
+				return
+			if (targloc == curloc)
+				return
+			var/obj/item/projectile/beam/destructor/lesser/A = new /obj/item/projectile/beam/destructor/lesser(src.loc)
+			A.current = curloc
+			A.yo = targloc.y - curloc.y
+			A.xo = targloc.x - curloc.x
+			A.process()
+		else
+			src << "\blue You cannot shoot at nothing!"
+	else
+		src << "\red Your soul cant handle that!"
+
+/mob/living/carbon/human/proc/restrain(var/mob/living/carbon/T in oview(7))
+	set name = "Restrain"
+	set desc = "Uses your psychic abilities to restrain someone movements or enhance the reflexes of other eldars."
+	set category = "Spells"
+	if (stat != CONSCIOUS)
+		src << "You must be conscious and alive to use psychic abilities."
+		return
+	if(Stress + 35 <= maxStress)
+		if(!T)
+			var/list/victims = list()
+			for(var/mob/living/carbon/C in oview(7))
+				victims += C
+			T = input(src, "Who should we restrain?") as null|anything in victims
+		if(T)
+			if(!istype(T))
+				src << "\red We only restrain living beings!"
+				return
+			src << "We psychically restrain [T] movements!"
+			visible_message("\green <B>[src]'s eyes glow green!</B>")
+			T.legcuffed = 1
+			Stress += 35
+			spawn(260)
+				visible_message("\green The psychic chains in [T] legs disappear!")
+				T.legcuffed = 0
+		else
+			src << "\blue You cannot restrain nothing!"
+	else
+		src << "\red Your soul cant handle that!"
+
+/mob/living/carbon/human/proc/enhance(var/mob/living/carbon/human/whitelisted/eldar/M in oview(7))
+	if (stat != CONSCIOUS)
+		src << "You must be conscious and alive to use psychic abilities."
+		return
+	if(Stress + 35 <= maxStress)
+		if(!M)
+			var/list/victims = list()
+			for(var/mob/living/carbon/C in oview(7))
+				victims += C
+			M = input(src, "Who should we restrain?") as null|anything in victims
+		if(M)
+			if(!istype(M))
+				src << "\red We only enhance eldars!"
+				return
+			src << "\blue We psychically enhance [M] movements!"
+			visible_message("\green <B>[src]'s eyes glow green!</B>")
+			Stress += 35
+			M.speedmod = 1.7
+			spawn(260)
+				M.speedmod = 1.2
+		else
+			src << "\blue You cannot enhance nothing"
+	else
+		src << "\red Your soul cant handle that!"
