@@ -15,6 +15,12 @@
 	uses = 1
 	origin_tech = "bluespace=2"
 
+/obj/item/weapon/teleportation_scroll/eldarwarlock
+	name = "Eldar Rune"
+	desc = "A rune used by an Eldar Warlock to emergently traverse the webway, limited in use."
+	icon_state = "Eldar Rune"
+	item_state = null
+
 
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)

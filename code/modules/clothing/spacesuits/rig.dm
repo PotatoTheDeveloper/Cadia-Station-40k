@@ -166,6 +166,16 @@
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
 
+/obj/item/clothing/head/helmet/space/rig/wizard/seer
+	name = "gem-encrusted hardsuit helmet"
+	desc = "A bizarre gem-encrusted helmet that radiates magical energies."
+	icon_state = "seer"
+	item_state = "seer"
+	unacidable = 1 //No longer shall our kind be foiled by lone chemists with spray bottles!
+	armor = list(melee = 40, bullet = 20, laser = 20,energy = 20, bomb = 35, bio = 100, rad = 50)
+	heat_protection = HEAD
+	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
+
 /obj/item/clothing/suit/space/rig/wizard
 	icon_state = "rig-wiz"
 	name = "Rune Armor"

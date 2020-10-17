@@ -103,3 +103,36 @@ Do the port
 
 /obj/machinery/gateway/ex_act()
 	return
+
+
+//Eldar RTD Gateways. Hardcoded to avoid the id = null thing. Annoying. -Mneme
+
+/obj/machinery/gateway/eldartd/prisonofbielann
+	name = "Prison of Bielann"
+	desc = "The stars themselves once lived and died at our command, yet you still dare to oppose our will."
+	id = "prisonship"
+	id_target = "prisoncell"
+
+/obj/machinery/gateway/eldartd/prisonofbielann/cell
+	id = "prisoncell"
+	id_target = "prisonship"
+
+/obj/machinery/gateway/eldartd/pathwayofulthran
+	name = "Pathway of Ulthran"
+	desc = "He who sees his own doom can better avoid its path. He who sees the doom of others can deliver it."
+	id = "pathwayofgilbyn"
+	id_target = "pathwayofgilbynplanet"
+
+/obj/machinery/gateway/eldartd/pathwayofulthran/ship
+	id = "pathwayofgilbynplanet"
+	id_target = "pathwayofgilbyn"
+
+/obj/machinery/gateway/eldartd/tearsofavenelle
+	name = "Tears of Avenelle"
+	desc = "I have seen the future, and it is death."
+	id = "tearsofargban"
+	id_target = "tearsofargbanplanet"
+
+/obj/machinery/gateway/eldartd/tearsofavenelle/ship
+	id = "tearsofargbanplanet"
+	id_target = "tearsofargban"

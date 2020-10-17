@@ -26,7 +26,7 @@
 	return 0
 
 /mob/living/carbon/human/RangedAttack(atom/A)
-	if(psymode == HUMANPSYKER || psymode == MUHREENPSYKER || psymode == WARLOCK)
+	if(psymode == HUMANPSYKER || psymode == MUHREENPSYKER)
 		if(a_intent == "harm")
 			lightningbolt(A)
 			return
@@ -45,6 +45,45 @@
 				src << "\red Your soul cant handle that!!"
 			return
 		return
+	
+	else if(psymode == ELDARPSYKER)
+		if(a_intent == "harm")
+			lesserdestructor(A)
+			return
+		
+		if(a_intent == "grab")
+			restrain(A)	
+			return
+		
+		if(a_intent == "disarm")
+			var/obj/effect/proc_holder/spell/aoe_turf/conjure/warpwall/M = new /obj/effect/proc_holder/spell/aoe_turf/conjure/warpwall
+			if(Stress + 30 <= maxStress)
+				Stress += 30
+				M.cast(list(A), src)
+		
+		if(a_intent == "help")
+			enhance(A)
+			return
+			
+	else if(psymode == WARLOCK)
+		if(a_intent == "harm")
+			destructor(A)
+			return
+		
+		if(a_intent == "grab")
+			restrain(A)	
+			return
+		
+		if(a_intent == "disarm")
+			var/obj/effect/proc_holder/spell/aoe_turf/conjure/warpwall/M = new /obj/effect/proc_holder/spell/aoe_turf/conjure/warpwall
+			if(Stress + 30 <= maxStress)
+				Stress += 30
+				visible_message("\red <B>[src]'s eyes glow red!</B>")
+				M.cast(list(A), src)
+	
+		if(a_intent == "help")
+			enhance(A)
+			return
 
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
